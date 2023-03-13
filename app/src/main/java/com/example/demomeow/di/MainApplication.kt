@@ -15,6 +15,7 @@ class MainApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
+            modules(dataModule, repositoryModule, useCaseModule, viewModelModule)
         }
     }
 }

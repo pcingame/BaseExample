@@ -20,12 +20,38 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions 'env'
+    productFlavors {
+        develop {
+            dimension "env"
+            applicationId "com.example.demomeow.dev"
+            buildConfigField "String", "BASE_URL", "\"https://exampleapi.com/\""
+            resValue "string", "app_name", "DemoMeow DEV"
+        }
+
+        staging {
+            dimension "env"
+            applicationId "com.example.demomeow"
+            buildConfigField "String", "BASE_URL", "\"https://exampleapi.com/\""
+            resValue "string", "app_name", "DemoMeow STG"
+        }
+
+        product {
+            dimension "env"
+            applicationId "com.example.demomeow"
+            buildConfigField "String", "BASE_URL", "\"https://exampleapi.com/\""
+            resValue "string", "app_name", "DemoMeow"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -53,6 +79,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+
 
     //koin
     implementation "io.insert-koin:koin-core:3.3.3"
@@ -67,9 +95,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     //Room database
-    implementation "androidx.room:room-runtime:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
-    implementation("androidx.room:room-ktx:2.4.3")
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
+    implementation("androidx.room:room-ktx:2.5.0")
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"

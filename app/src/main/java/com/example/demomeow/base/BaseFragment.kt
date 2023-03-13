@@ -1,10 +1,10 @@
 package com.example.demomeow.base
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
@@ -13,8 +13,8 @@ import androidx.navigation.navOptions
 import androidx.viewbinding.ViewBinding
 import com.example.demomeow.R
 import com.example.demomeow.common.DebugLog
-import com.example.demomeow.common.ViewInflater
 import com.example.demomeow.common.error.ApiException
+import com.example.demomeow.common.extension.ViewInflater
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     val bindingInflater: ViewInflater<VB>

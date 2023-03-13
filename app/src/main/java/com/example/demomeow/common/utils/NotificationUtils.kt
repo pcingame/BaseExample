@@ -8,11 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
-import com.example.demomeow.MainActivity
+import com.example.demomeow.presentation.ui.main.MainActivity
 import com.example.demomeow.R
 import com.example.demomeow.di.App
-import com.example.demomeow.di.App.context
 
 object NotificationUtils {
 

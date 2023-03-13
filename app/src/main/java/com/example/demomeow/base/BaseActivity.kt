@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
-import com.example.demomeow.R
 import com.example.demomeow.common.DebugLog
-import com.example.demomeow.common.ViewInflater
+import com.example.demomeow.common.extension.ViewInflater
 import com.example.demomeow.databinding.ActivityBaseBinding
 
 abstract class BaseActivity<VB : ViewBinding>(val inflateBinding: ViewInflater<VB>) :

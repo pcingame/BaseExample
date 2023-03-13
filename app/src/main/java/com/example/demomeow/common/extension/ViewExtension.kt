@@ -1,4 +1,4 @@
-package com.example.demomeow.common
+package com.example.demomeow.common.extension
 
 import android.os.SystemClock
 import android.view.LayoutInflater

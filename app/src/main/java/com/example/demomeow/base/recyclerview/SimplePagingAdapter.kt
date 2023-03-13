@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.viewbinding.ViewBinding
 import com.example.demomeow.base.BaseDiffUtilItemCallBack
-import com.example.demomeow.common.ViewInflater
+import com.example.demomeow.common.extension.ViewInflater
 
 class SimplePagingAdapter<ItemBinding : ViewBinding, T : Any>(
     private val onInflateItemBD: ViewInflater<ItemBinding>,

@@ -3,7 +3,7 @@ package com.example.demomeow.base.recyclerview
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.demomeow.common.click
+import com.example.demomeow.common.extension.click
 
 open class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {
     protected var itemData: T? = null

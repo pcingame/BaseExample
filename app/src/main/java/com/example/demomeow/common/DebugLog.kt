@@ -24,97 +24,23 @@ class DebugLog {
      * Get call class name / Method name
      * @return
      */
-
     private fun getMethodNameString(): String {
-        //get information about caller [4]
+        // Get information about caller [4]
         val element = Thread.currentThread().stackTrace[POSITION_STACK_TRACE]
 
-        //get class name
+        // Get class name
         val fullClassName = element.className
-        val simpleClassName = fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
-        //get method name
+        val simpleClassName =
+            fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
+        // Get method name
         val methodName = element.methodName
-        //get the number of rows
+        //Get the number of rows
         val lineNumber = element.lineNumber
 
-        //Method name string generation
+        // Method name string generation
         return "$simpleClassName#$methodName:$lineNumber"
     }
 
-    /**
-     * Add message text to new line in the log file
-     *
-     * @param text
-     */
-    private fun appendLogFile(text: Any) {
-        val asthmaLog1 = File(App.context.filesDir, LOG_FILE_NAME + "_1.log")
-
-        // if asthmaLog1 is existed
-        if (asthmaLog1.exists()) {
-            // if asthmaLog1 reached 1MB
-            if (asthmaLog1.length() >= MAXIMUM_LOG_FILE_SIZE) {
-                // prepare log files
-                prepareLogFiles()
-            }
-        } else {
-            try {
-                asthmaLog1.createNewFile()
-            } catch (e: IOException) {
-                Log.d(TAG, e.message ?: "")
-            }
-        }
-        try {
-            BufferedWriter(FileWriter(asthmaLog1, true)).run {
-                append(DateFormat.getDateInstance().format(Date()))
-                append(": ")
-                append(text.toString())
-                newLine()
-                close()
-            }
-
-        } catch (e: IOException) {
-            Log.d(TAG, e.message ?: "")
-        }
-    }
-
-    /**
-     * Logcat output and file output of specified LEVEL or higher
-     * @param logType = LogLevel
-     * @param fullLog = log Message
-     */
-
-    private fun logOut(logType: Int, fullLog: String) {
-        //True if LOGGER_ENTRY_MAX_LEN is exceeded (= output remaining log)
-        var retryFlag = false
-        //Output Log less than LOGGER_ENTRY_MAX_LEN
-        var log = fullLog
-        val length = fullLog.length
-        if (length >= LOGGER_ENTRY_MAX_LEN) {
-            retryFlag = true
-            log = fullLog.substring(0, LOGGER_ENTRY_MAX_LEN)
-        }
-
-        //Logcat output
-        if (isDebuggable()) {
-            when (logType) {
-                Log.ASSERT -> Log.wtf(TAG, log)
-                Log.ERROR -> Log.wtf(TAG, log)
-                Log.WARN -> Log.wtf(TAG, log)
-                Log.INFO -> Log.wtf(TAG, log)
-                Log.DEBUG -> Log.wtf(TAG, log)
-                Log.VERBOSE -> Log.wtf(TAG, log)
-                else -> {
-                    Log.d(TAG, log)
-                }
-            }
-        }
-
-        //LogFile output
-        if (logType >= LOG_OUT_LEVEL) appendLogFile(log)
-
-        // If LOGGER_ENTRY_MAX_LEN is exceeded, the rest will be output again.
-        if (retryFlag) logOut(logType, fullLog.substring(LOGGER_ENTRY_MAX_LEN))
-    }
 
     /**
      * Show error level message
@@ -162,6 +88,80 @@ class DebugLog {
     }
 
     /**
+     * Add message text to new line in the log file
+     *
+     * @param text
+     */
+    private fun appendLogFile(text: Any) {
+        val asthmaLog1 = File(App.context.filesDir, LOG_FILE_NAME + "_1.log")
+
+        // if asthmaLog1 is existed
+        if (asthmaLog1.exists()) {
+            // if asthmaLog1 reached 1MB
+            if (asthmaLog1.length() >= MAXIMUM_LOG_FILE_SIZE) {
+                // prepare log files
+                prepareLogFiles()
+            }
+        } else {
+            try {
+                asthmaLog1.createNewFile()
+            } catch (e: IOException) {
+                Log.d(TAG, e.message ?: "")
+            }
+        }
+        try {
+            BufferedWriter(FileWriter(asthmaLog1, true)).run {
+                append(DateFormat.getDateInstance().format(Date()))
+                append(": ")
+                append(text.toString())
+                newLine()
+                close()
+            }
+
+        } catch (e: IOException) {
+            Log.d(TAG, e.message ?: "")
+        }
+    }
+
+    /**
+     * Logcat output and file output of specified LEVEL or higher
+     * @param logType = LogLevel
+     * @param fullLog = log Message
+     */
+    private fun logOut(logType: Int, fullLog: String) {
+        //True if LOGGER_ENTRY_MAX_LEN is exceeded (= output remaining log)
+        var retryFlag = false
+        //Output Log less than LOGGER_ENTRY_MAX_LEN
+        var log = fullLog
+        val length = fullLog.length
+        if (length >= LOGGER_ENTRY_MAX_LEN) {
+            retryFlag = true
+            log = fullLog.substring(0, LOGGER_ENTRY_MAX_LEN)
+        }
+
+        //LogCat output
+        if (isDebuggable()) {
+            when (logType) {
+                Log.ASSERT -> Log.wtf(TAG, log)
+                Log.ERROR -> Log.e(TAG, log)
+                Log.WARN -> Log.w(TAG, log)
+                Log.INFO -> Log.i(TAG, log)
+                Log.DEBUG -> Log.d(TAG, log)
+                Log.VERBOSE -> Log.v(TAG, log)
+                else -> {
+                    Log.d(TAG, log)
+                }
+            }
+        }
+
+        //LogFile output
+        if (logType >= LOG_OUT_LEVEL) appendLogFile(log)
+
+        // If LOGGER_ENTRY_MAX_LEN is exceeded, the rest will be output again.
+        if (retryFlag) logOut(logType, fullLog.substring(LOGGER_ENTRY_MAX_LEN))
+    }
+
+    /**
      * Create new file
      */
     private fun prepareLogFiles() {
@@ -190,7 +190,7 @@ class DebugLog {
     }
 
     companion object {
-        //Log tag
+        //Log Tag
         private const val TAG = "DEBUG"
 
         //Log level. Default is INFO
@@ -206,12 +206,12 @@ class DebugLog {
         /**
          * Length for split output
          * (4 * 1024)
-         * */
+         */
         private const val LOGGER_ENTRY_MAX_LEN = 3000
 
         //Maximum size of 1 file
-        private const val MAXIMUM_LOG_FILE_SIZE = 1048576
+        private const val MAXIMUM_LOG_FILE_SIZE = 1048576 // 1MB
         private const val POSITION_STACK_TRACE = 4
-    }
 
+    }
 }

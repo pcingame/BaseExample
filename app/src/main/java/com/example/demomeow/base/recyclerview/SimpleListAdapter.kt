@@ -3,7 +3,7 @@ package com.example.demomeow.base.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.example.demomeow.common.ViewInflater
+import com.example.demomeow.common.extension.ViewInflater
 
 /**
  * Simple List Adapter
