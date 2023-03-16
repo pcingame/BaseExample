@@ -1,4 +1,4 @@
-package com.example.demomeow.common
+package com.example.demomeow.common.utils
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

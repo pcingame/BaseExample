@@ -3,7 +3,7 @@ package com.example.demomeow.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demomeow.common.DebugLog
-import com.example.demomeow.common.SingleLiveData
+import com.example.demomeow.common.utils.SingleLiveData
 import com.example.demomeow.common.error.handlerException
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent

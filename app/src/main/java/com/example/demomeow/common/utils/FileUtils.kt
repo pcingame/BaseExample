@@ -1,5 +1,6 @@
-package com.example.demomeow.common
+package com.example.demomeow.common.utils
 
+import com.example.demomeow.common.DebugLog
 import com.example.demomeow.di.App
 import java.io.File
 import java.io.FileWriter

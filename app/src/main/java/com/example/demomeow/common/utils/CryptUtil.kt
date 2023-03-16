@@ -1,4 +1,4 @@
-package com.example.demomeow.common.preferences
+package com.example.demomeow.common.utils
 
 import android.util.Base64
 import java.security.InvalidAlgorithmParameterException
